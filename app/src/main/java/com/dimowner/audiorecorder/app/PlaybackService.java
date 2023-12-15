@@ -44,7 +44,7 @@ import org.jetbrains.annotations.NotNull;
 import androidx.core.app.NotificationManagerCompat;
 import timber.log.Timber;
 
-public class PlaybackService extends Service {
+public class PlaybackService extends BaseService {
 
 	private final static String CHANNEL_NAME = "Default";
 	private final static String CHANNEL_ID = "com.dimowner.audiorecorder.NotificationId";
@@ -164,7 +164,7 @@ public class PlaybackService extends Service {
 		// Create notification default intent.
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-		contentPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+		contentPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, flagUC);
 		startForeground(NOTIF_ID, buildNotification());
 		started = true;
 	}
@@ -202,7 +202,7 @@ public class PlaybackService extends Service {
 	protected PendingIntent getPendingSelfIntent(Context context, String action) {
 		Intent intent = new Intent(context, StopPlaybackReceiver.class);
 		intent.setAction(action);
-		return PendingIntent.getBroadcast(context, 10, intent, 0);
+		return PendingIntent.getBroadcast(context, 10, intent, flagUC);
 	}
 
 	@RequiresApi(Build.VERSION_CODES.O)

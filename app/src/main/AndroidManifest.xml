@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_TYPE_MICROPHONE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
     <uses-feature android:name="android.hardware.screen.portrait" android:required="false" />
     <uses-feature android:name="android.hardware.telephony" android:required="false" />
     <uses-feature android:name="android.hardware.location" android:required="false" />
@@ -80,8 +83,12 @@
             android:name=".app.TransparentRecordingActivity"
             android:theme="@style/Theme.Transparent" />
 
-        <service android:name=".app.RecordingService" />
-        <service android:name=".app.PlaybackService" />
+        <service android:name=".app.RecordingService"
+            android:foregroundServiceType="mediaPlayback" >
+        </service>
+        <service android:name=".app.PlaybackService"
+            android:foregroundServiceType="mediaPlayback">
+        </service>
         <service android:name=".app.DownloadService" />
         <service android:name=".app.DecodeService" />
         <service android:name=".app.moverecords.MoveRecordsService" />

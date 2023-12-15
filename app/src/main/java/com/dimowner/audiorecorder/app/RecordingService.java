@@ -58,7 +58,7 @@ import java.io.IOException;
 
 import timber.log.Timber;
 
-public class RecordingService extends Service {
+public class RecordingService extends BaseService {
 
 	private final static String CHANNEL_NAME = "Default";
 	private final static String CHANNEL_ID = "com.dimowner.audiorecorder.NotificationId";
@@ -241,7 +241,8 @@ public class RecordingService extends Service {
 //		remoteViewsBig.setInt(R.id.container, "setBackgroundColor", this.getResources().getColor(colorMap.getPrimaryColorRes()));
 
 		contentPendingIntent = createContentIntent();
-		startForeground(NOTIF_ID, buildNotification());
+		//startForeground(NOTIF_ID, buildNotification());
+		startForeground(NOTIF_ID, buildNotification(), android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
 		started = true;
 	}
 
@@ -270,7 +271,7 @@ public class RecordingService extends Service {
 		// Create notification default intent.
 		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-		return PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+		return PendingIntent.getActivity(getApplicationContext(), 0, intent, flagUC);
 	}
 
 	private void stopForegroundService() {
@@ -283,7 +284,7 @@ public class RecordingService extends Service {
 	protected PendingIntent getPendingSelfIntent(Context context, String action) {
 		Intent intent = new Intent(context, StopRecordingReceiver.class);
 		intent.setAction(action);
-		return PendingIntent.getBroadcast(context, 10, intent, 0);
+		return PendingIntent.getBroadcast(context, 10, intent, flagUC);
 	}
 
 	@RequiresApi(Build.VERSION_CODES.O)
