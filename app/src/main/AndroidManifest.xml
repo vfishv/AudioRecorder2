@@ -92,7 +92,9 @@
         <service android:name=".app.DownloadService"
             android:foregroundServiceType="mediaPlayback">
         </service>
-        <service android:name=".app.DecodeService" />
+        <service android:name=".app.DecodeService"
+            android:foregroundServiceType="mediaPlayback">
+        </service>
         <service android:name=".app.moverecords.MoveRecordsService" />
 
         <receiver android:name=".WidgetReceiver" />
