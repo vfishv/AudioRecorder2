@@ -95,7 +95,9 @@
         <service android:name=".app.DecodeService"
             android:foregroundServiceType="mediaPlayback">
         </service>
-        <service android:name=".app.moverecords.MoveRecordsService" />
+        <service android:name=".app.moverecords.MoveRecordsService"
+            android:foregroundServiceType="mediaPlayback">
+        </service>
 
         <receiver android:name=".WidgetReceiver" />
         <receiver android:name=".app.RecordingService$StopRecordingReceiver" />
